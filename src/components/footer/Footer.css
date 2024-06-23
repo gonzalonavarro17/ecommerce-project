@@ -1,0 +1,32 @@
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    font-size: 12px;
+}
+
+.Container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 2rem;
+    text-align: center;
+}
+
+.Container-column {
+    text-align: center;
+}
+
+.Container-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.Container-column ul li {
+    margin-bottom: 0.5rem;
+}
+
+.Footer-copy {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
