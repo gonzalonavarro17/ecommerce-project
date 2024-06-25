@@ -1,22 +1,30 @@
 import './Content.css'
-import { products } from '../../fakeapi/data.json'
+import data from '../../fakeapi/data.json'
 import PropTypes from 'prop-types';
 
-export const Content = () => {
+function Content({ filtro }) {
+    const productsFiltrados = data.filter(
+        (product) => product.title.toLowerCase().includes(filtro.toLowerCase())
+    );
+
     return (
         <>
         <News />
         <div className='Collection-slide'>
-            {   products.map( eachProduct =>
+            {   productsFiltrados.map( product =>
                     <Collection
-                        key={ eachProduct.id }
-                        { ...eachProduct }
+                        key={product.id}
+                        image={product.image}
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
                     />
                 )
             }
         </div>
         </>
     )
+
 }
 
 const News = () => {
@@ -46,3 +54,5 @@ Collection.propTypes = {
     description: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
 }
+
+export default Content;

@@ -1,52 +1,44 @@
 import { useState } from 'react'
 import './Menu.css'
-//import { products } from '../../fakeapi/data.json'
 
-export const Header = () => {
-    return (
+function Header({ onfilterChange }) {
+    const menuOptions = ["Inicio", "Categorias", "Ofertas", "Contacto"];
+    const [ textoFiltro, setTextoFiltro ] = useState("") 
+
+    const handleInputChange = (e) => {
+        const nuevoTexto = e.target.value;
+        setTextoFiltro(nuevoTexto);
+        onfilterChange(nuevoTexto);
+     };
+
+     return (
+        <>
         <header className='Header'>
             <div className='Header-wrapper'>
                 <Logo />
-                <Menu />
+                <ul>
+                    {menuOptions.map((opt) => (
+                        <li key={opt}>{opt}</li>
+                    ))}
+                </ul>
+                <input value={textoFiltro} 
+                    onChange={handleInputChange}
+                    type="text" 
+                    className="Header-search" 
+                    placeholder="Buscar productos" 
+            />
+                <Iconos />
             </div>
         </header>
+        </>
     )
 }
+
+
 
 const Logo = () => {
     return (
         <h1 className='Header-h1'>MiTienda</h1>
-    )
-}
-
-const Menu = () => {
-    return (
-        <nav className='Header-nav'>
-            <ul className='Header-ul'>
-                <li className='Header-li'>INICIO</li>
-                <li className='Header-li'>CATEGORÍAS</li>
-                <li className='Header-li'>OFERTAS</li>
-                <li className='Header-li'>CONTACTO</li>
-            </ul>
-            <Buscador />
-            <Iconos />
-        </nav>
-    )
-}
-
-const Buscador = () => {
-    
-    const [ search, setSearch ] = useState("")
-
-    const searcher = (e) => {
-        setSearch(e.target.value)
-        console.log(e.target.value)
-    }
-
-    /*const results = !search ? products : products.filter((dato) => dato.title.toLowerCase().includes(search.toLocaleLowerCase()))*/
-
-    return (
-        <input value={search} onChange={searcher} type="text" className="Header-search" placeholder="Buscar productos"></input>
     )
 }
 
@@ -60,3 +52,4 @@ const Iconos = () => {
     )
 }
 
+export default Header;
