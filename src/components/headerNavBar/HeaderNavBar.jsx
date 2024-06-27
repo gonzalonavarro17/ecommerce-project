@@ -12,10 +12,10 @@ function HeaderNavBar({ onFilterChange }) {
 
      return (
         <>
-            <div className="logo">MiTIneda</div>
+            <div className="logo">MiTienda</div>
             <ul>
                 {menuOptions.map((option) => (
-                <li key={option}>{option}</li>
+                <li className="options-menu" key={option}>{option}</li>
                 ))}
             </ul>
             <div className="search-bar">
@@ -23,7 +23,7 @@ function HeaderNavBar({ onFilterChange }) {
                 onChange={handleInputChange}
                 type="text" 
                 className="Header-search" 
-                placeholder="Buscar productos" 
+                placeholder="Buscar productos..." 
             />
             </div>
         </>

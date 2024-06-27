@@ -1,4 +1,4 @@
-import "./PrductSection.css";
+import "./ProductsSection.css";
 import ProductCard from "../ProductCard/ProductCard.jsx"
 import data from "../../fakeapi/data.json";
 

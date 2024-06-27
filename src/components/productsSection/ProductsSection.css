@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Para asegurar que el body tenga al menos la altura de la ventana */
+}
+
+.products-section{
+    padding: 1rem;
+    /*min-height: calc( 100vh - 4rem );*/
+    /*overflow-x: hidden;*/
+    display: grid;
+    /* grid-template-columns: repeat( auto-fit , mimax( 18.75rem , 1fr)) ; */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3rem;
+}

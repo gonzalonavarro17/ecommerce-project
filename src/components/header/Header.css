@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header-container{
+    padding: 0.625rem 1.25rem;
+    display: flex; /* Establece el contenedor como flexbox */
+    align-items: center; /* Centra verticalmente los elementos */
+    background-color: #333333; /* Color de fondo opcional */
+    color: #ffffff;
+}
+
+.logo {
+    font-size: 1.5rem; /* Tamaño de fuente para el logo */
+    font-weight: bold; /* Negrita para el texto del logo */
+    margin-left: 1rem;
+}
+
+.options-menu {
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+.menu-options li {
+    margin-left: 20px; /* Espacio entre elementos de la lista */
+    justify-content: space-between;
+}
+
+.search-bar {
+    width: 40rem;
+}
+
+.Header-search {
+    width: 80%; /* El input del buscador ocupa todo el ancho disponible */
+    padding: 8px; /* Espacio interior dentro del input */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 4px; /* Borde redondeado */
+    font-size: 1rem; /* Tamaño de fuente */
+}
+
+.Header-icons {
+    display: flex;
+    gap: 1rem;
+    margin-left: 10rem;
+}
