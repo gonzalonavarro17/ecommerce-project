@@ -2,9 +2,9 @@ import "./ProductsSection.css";
 import ProductCard from "../ProductCard/ProductCard.jsx"
 import data from "../../fakeapi/data.json";
 
-function PorductsSection({ filtro }) {
+function ProductsSection({ filtro }) {
     const producst = data.filter(
-        ( product ) => product.title.toLocaleLowerCase().includes(filtro.toLocaleLowerCase())
+        ( product ) => product.title.toLocaleLowerCase().includes(filtro.toLowerCase())
     );
 
     return (
@@ -16,4 +16,4 @@ function PorductsSection({ filtro }) {
     );
 }
 
-export default PorductsSection;
+export default ProductsSection;

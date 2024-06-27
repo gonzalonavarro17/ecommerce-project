@@ -7,7 +7,7 @@ function HeaderNavBar({ onFilterChange }) {
     const handleInputChange = (e) => {
         const nuevoTexto = e.target.value;
         setTextoFiltro(nuevoTexto);
-        onfilterChange(nuevoTexto);
+        onFilterChange(nuevoTexto);
      };
 
      return (
