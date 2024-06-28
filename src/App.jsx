@@ -7,12 +7,17 @@ import ProductsSection from './components/productsSection/ProductsSection.jsx';
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
 
   return (
     <>
-      <Header   onFilterChange={setFiltro} />
+      <Header   onFilterChange={setFiltro} cartItemCount={cartItems.length} />
       <Banner />
-      <ProductsSection filtro={filtro} />
+      <ProductsSection filtro={filtro} addToCart={addToCart}/>
       <Footer />
     </>
   )

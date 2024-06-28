@@ -13,7 +13,7 @@ function HeaderNavBar({ onFilterChange }) {
      return (
         <>
             <div className="logo">MiTienda</div>
-            <ul>
+            <ul className="menu-options">
                 {menuOptions.map((option) => (
                 <li className="options-menu" key={option}>{option}</li>
                 ))}

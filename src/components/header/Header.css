@@ -5,42 +5,64 @@ body {
 
 .header-container{
     padding: 0.625rem 1.25rem;
-    display: flex; /* Establece el contenedor como flexbox */
-    align-items: center; /* Centra verticalmente los elementos */
-    background-color: #333333; /* Color de fondo opcional */
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    background-color: #333333; 
     color: #ffffff;
+    box-sizing: border-box;
 }
 
 .logo {
-    font-size: 1.5rem; /* Tamaño de fuente para el logo */
-    font-weight: bold; /* Negrita para el texto del logo */
-    margin-left: 1rem;
+    font-size: 1.5rem; 
+    font-weight: bold; 
 }
 
 .options-menu {
     display: inline-block;
-    margin-right: 2rem;
+}
+
+.menu-options {
+    list-style: none; 
+    display: flex; 
+    padding: 0;
+    margin: 0; 
 }
 
 .menu-options li {
-    margin-left: 20px; /* Espacio entre elementos de la lista */
-    justify-content: space-between;
+    margin-left: 3rem;
 }
 
 .search-bar {
-    width: 40rem;
+    width: 60rem;
+    margin-left: 3rem;
 }
 
 .Header-search {
-    width: 80%; /* El input del buscador ocupa todo el ancho disponible */
-    padding: 8px; /* Espacio interior dentro del input */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 4px; /* Borde redondeado */
-    font-size: 1rem; /* Tamaño de fuente */
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
 .Header-icons {
     display: flex;
-    gap: 1rem;
-    margin-left: 10rem;
+    gap: 2rem;
+    margin-right: 1rem;
+}
+
+.icon-container {
+    position: relative;
+}
+
+.icon-badge {
+    position: absolute;
+    top: -0.5rem; 
+    right: -0.5rem; 
+    background-color: #ff5722;
+    color: white; 
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.5rem;
 }
