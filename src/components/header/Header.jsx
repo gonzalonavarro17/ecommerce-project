@@ -2,7 +2,7 @@ import "./Header.css"
 import { useContext, useState } from 'react';
 import HeaderNavBar from "../headerNavBar/HeaderNavBar";
 import IconList from "../iconList/IconList"
-import CestaProductos from "../../pages/CestaProductos";
+import CestaProductos from "../CestaProductos/CestaProductos";
 import { ThemeContext } from "../Content/ThemeContext";
 
 function Header({ onFilterChange, cartItemCount}) {

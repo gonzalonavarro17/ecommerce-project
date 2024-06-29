@@ -1,11 +1,15 @@
-import './Banner.css'
+import './Banner.css';
 
-const Banner = () => {
+const Banner = ({ isLoggedIn, user }) => {
     return (
         <section className='Section-news'>
-            <p className='Section-p'>¡20% de descuento para nuevos clientes!</p>
+            {isLoggedIn ? (
+                <p className='Section-p'>¡Bienvenido de nuevo, {user?.name}!</p>
+            ) : (
+                <p className='Section-p'>Crea una cuenta para disfrutar de nuevos descuentos</p>
+            )}
         </section>
-    )
-}
+    );
+};
 
 export default Banner;
