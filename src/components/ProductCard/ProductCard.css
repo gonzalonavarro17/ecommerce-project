@@ -67,3 +67,14 @@ img {
 .product-card button:hover {
     background-color: #555555;
 }
+
+.button-add.Light {
+    background-color: #3770F8;
+    color: #fff;
+}
+
+/* Estilos para el botón en modo oscuro */
+.button-add.dark {
+    background-color: #FF5722;
+    color: #fff;
+}

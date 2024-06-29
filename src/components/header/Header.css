@@ -56,6 +56,10 @@ body {
     position: relative;
 }
 
+.fa-shopping-cart {
+    cursor: pointer;
+}
+
 .icon-badge {
     position: absolute;
     top: -0.5rem; 
@@ -65,4 +69,11 @@ body {
     border-radius: 50%;
     padding: 0.25rem 0.5rem;
     font-size: 0.5rem;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
 }

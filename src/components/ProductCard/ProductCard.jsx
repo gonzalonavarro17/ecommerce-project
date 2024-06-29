@@ -1,7 +1,10 @@
 import './ProductCard.css'
+import { ThemeContext  } from '../Content/ThemeContext';
+import { useContext } from 'react';
 
 const ProductCard = ({ product, addToCart }) => {
     const { id, title, price, description, image, rating } = product;
+    const { theme } = useContext(ThemeContext);
 
     const handleAddToCart = () => {
         addToCart(product);
@@ -19,7 +22,7 @@ const ProductCard = ({ product, addToCart }) => {
                     </div>
                 )}
                 <p className='product-price'>{`$${price}`}</p>
-                <button className='button-add' onClick={handleAddToCart}>Agregar al carrito</button>
+                <button className={`button-add ${theme}`} onClick={handleAddToCart}>Agregar al carrito</button>
             </div>
         </div>
     )
