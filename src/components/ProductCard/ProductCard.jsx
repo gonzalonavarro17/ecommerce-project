@@ -10,6 +10,8 @@ const ProductCard = ({ product, addToCart }) => {
         addToCart(product);
     };
 
+
+
     return (
         <div className='product-card' key={ id }>
             <img className='product-image' src={ image } alt={ title } />

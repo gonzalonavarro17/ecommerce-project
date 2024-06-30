@@ -1,4 +1,4 @@
-function IconList({ cartItemCount, onCartIconClick  }) {
+function IconList({ cartItemCount, onCartIconClick }) {
 
     return (
         <div className="Header-icons">

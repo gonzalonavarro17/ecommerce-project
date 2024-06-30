@@ -10,10 +10,11 @@ function ProductsSection({ filtro, addToCart }) {
     return (
         <div className="products-section">
             { producst.map((product) => (
-                <ProductCard key={ product.id } product={ product } addToCart={addToCart} />
+                <ProductCard key={ product.id } product={ product } addToCart={ addToCart } />
             ))}
         </div>
     );
 }
+
 
 export default ProductsSection;

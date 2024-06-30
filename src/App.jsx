@@ -5,6 +5,7 @@ import { Footer } from './components/footer/Footer';
 import { useState, useEffect } from 'react';
 import ProductsSection from './components/productsSection/ProductsSection.jsx';
 import { ThemeProvider } from './components/Content/ThemeContext.jsx';
+import CestaProductos from './components/CestaProductos/CestaProductos.jsx';
 import Form from './components/FormLogin/FormLogin.jsx';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -37,13 +39,28 @@ function App() {
     localStorage.removeItem('user');
   };
 
+  const handleCartIconClick = () => {
+    setShowCart(true);
+  };
+
+  const handleBackToProductsClick = () => {
+    setShowCart(false);
+  };
+
+  console.log(cartItems)
+
   return (
       <>
         <ThemeProvider>
-          <Header   onFilterChange={setFiltro} cartItemCount={cartItems.length} />
+          <Header   onFilterChange={setFiltro} cartItemCount={cartItems.length} onCartIconClick={handleCartIconClick} />
           <Banner isLoggedIn={isLoggedIn} user={user} />
+            {showCart ? ( // Renderizado condicional: Mostrar CartSection si showCart es true, de lo contrario mostrar ProductsSection
+          <CestaProductos cartItems={cartItems} onClose={handleBackToProductsClick} />
+              ) : (
+          <ProductsSection filtro={filtro} addToCart={addToCart} />
+              )}
           <ProductsSection filtro={filtro} addToCart={addToCart}/>
-          <Form onLogin={handleLogin} onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+          <Form onLogin={handleLogin} onLogout={handleLogout} isLoggedIn={isLoggedIn}/>
           <Footer />
         </ThemeProvider>
       </>

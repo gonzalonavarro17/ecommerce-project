@@ -1,32 +1,32 @@
-import "./Header.css"
+import "./Header.css";
 import { useContext, useState } from 'react';
 import HeaderNavBar from "../headerNavBar/HeaderNavBar";
-import IconList from "../iconList/IconList"
-import CestaProductos from "../CestaProductos/CestaProductos";
+import IconList from "../iconList/IconList";
 import { ThemeContext } from "../Content/ThemeContext";
+import CestaProductos from "../CestaProductos/CestaProductos";
 
-function Header({ onFilterChange, cartItemCount}) {
-    const [ verCestaProductos, setVerCestaProductos ] = useState(false);
-    const { theme, toggleTheme } = useContext( ThemeContext );
+function Header({ onFilterChange, cartItemCount }) {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    const [mostrarCesta, setMostrarCesta] = useState(false);
 
-    const handleToggleCartSummary = () => {
-        setVerCestaProductos(!verCestaProductos);
+    const handleMostrarCesta = () => {
+        setMostrarCesta(true);
     };
 
-    const handleCloseCartSummary = () => {
-        setVerCestaProductos(false);
+    const handleCloseCesta = () => {
+        setMostrarCesta(false);
     };
 
     return (
         <header>
             <div className="header-container">
-                <HeaderNavBar onFilterChange={ onFilterChange } />
-                <IconList cartItemCount={cartItemCount} onCartIconClick={handleToggleCartSummary} />
+                <HeaderNavBar onFilterChange={onFilterChange} />
+                <IconList cartItemCount={cartItemCount} onCartIconClick={handleMostrarCesta} />
                 <button onClick={toggleTheme} className="theme-toggle">
                     {theme === "Light" ? "🌙" : "☀️"}
                 </button>
             </div>
-            {verCestaProductos && <CestaProductos cesta={[]} onClose={handleCloseCartSummary} />}
+            {mostrarCesta && <CestaProductos onClose={handleCloseCesta} />}
         </header>
     );
 }
