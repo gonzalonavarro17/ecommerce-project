@@ -4,7 +4,7 @@ import Banner from './components/banner/Banner.jsx';
 import { Footer } from './components/footer/Footer';
 import { useState, useEffect } from 'react';
 import ProductsSection from './components/productsSection/ProductsSection.jsx';
-import { ThemeProvider } from './components/Content/ThemeContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import CestaProductos from './components/CestaProductos/CestaProductos.jsx';
 import Form from './components/FormLogin/FormLogin.jsx';
 
@@ -47,18 +47,17 @@ function App() {
     setShowCart(false);
   };
 
-  console.log(cartItems)
-
   return (
       <>
         <ThemeProvider>
-          <Header   onFilterChange={setFiltro} cartItemCount={cartItems.length} onCartIconClick={handleCartIconClick} />
+          <Header   
+            onFilterChange={setFiltro} 
+            cartItemCount={cartItems.length} 
+            mostrarCesta={handleCartIconClick}
+            mostrarProductos={handleBackToProductsClick}
+          />
           <Banner isLoggedIn={isLoggedIn} user={user} />
-            {showCart ? ( // Renderizado condicional: Mostrar CartSection si showCart es true, de lo contrario mostrar ProductsSection
-          <CestaProductos cartItems={cartItems} onClose={handleBackToProductsClick} />
-              ) : (
-          <ProductsSection filtro={filtro} addToCart={addToCart} />
-              )}
+            { showCart ? <CestaProductos /> : <ProductsSection filtro={filtro} addToCart={addToCart} /> }
           <ProductsSection filtro={filtro} addToCart={addToCart}/>
           <Form onLogin={handleLogin} onLogout={handleLogout} isLoggedIn={isLoggedIn}/>
           <Footer />

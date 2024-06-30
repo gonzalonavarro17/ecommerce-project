@@ -1,16 +1,9 @@
 import './ProductCard.css'
-import { ThemeContext  } from '../Content/ThemeContext';
-import { useContext } from 'react';
+import { CestaContent } from "../../hooks/useCesta"
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
-    const { theme } = useContext(ThemeContext);
-
-    const handleAddToCart = () => {
-        addToCart(product);
-    };
-
-
+    const { addToCart } = CestaContent();
 
     return (
         <div className='product-card' key={ id }>
@@ -24,7 +17,7 @@ const ProductCard = ({ product, addToCart }) => {
                     </div>
                 )}
                 <p className='product-price'>{`$${price}`}</p>
-                <button className={`button-add ${theme}`} onClick={handleAddToCart}>Agregar al carrito</button>
+                <button className="button-add" onClick={() => addToCart(product)}>Agregar al carrito</button>
             </div>
         </div>
     )
