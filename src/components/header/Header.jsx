@@ -1,23 +1,36 @@
 import "./Header.css";
-import { useContext, useState } from 'react';
 import HeaderNavBar from "../headerNavBar/HeaderNavBar";
 import IconList from "../iconList/IconList";
-import { ThemeContext } from "../../context/ThemeContext";
+import PropTypes from "prop-types";
 
-function Header({ onFilterChange, cartItemCount, mostrarCesta, mostrarProductos}) {
-    const { theme, toggleTheme } = useContext(ThemeContext);
+function Header({ onFilterChange, showCart, showProducts }) {
+    const handleFilterChange = (nuevoFiltro) => {
+        onFilterChange(nuevoFiltro);
+    };
 
     return (
         <header>
             <div className="header-container">
-                <HeaderNavBar onFilterChange={onFilterChange} onClickLogo={mostrarProductos} />
-                <IconList cartItemCount={cartItemCount} onCartIconClick={mostrarCesta} />
-                <button onClick={toggleTheme} className="theme-toggle">
-                    {theme === "Light" ? "🌙" : "☀️"}
-                </button>
+                <HeaderNavBar 
+                    onFilterChange={handleFilterChange} 
+                    onClickLogo={showProducts} 
+                />
+                <IconList onCartIconClick={showCart} />
             </div>
         </header>
     );
 }
+
+/* <button onClick={toggleTheme} className="theme-toggle">
+                    {theme === "Light" ? "🌙" : "☀️"}
+                </button>
+*/
+
+Header.propTypes = {
+    onFilterChange: PropTypes.func.isRequired,
+    showCart: PropTypes.func.isRequired,
+    showProducts: PropTypes.func.isRequired,
+};
+
 
 export default Header;

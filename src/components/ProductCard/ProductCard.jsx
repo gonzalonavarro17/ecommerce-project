@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import './ProductCard.css'
-import { CestaContent } from "../../hooks/useCesta"
+import { useCart } from "../../hooks/useCart.js"
 
 const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
-    const { addToCart } = CestaContent();
+    const { addToCart } = useCart();
 
     return (
         <div className='product-card' key={ id }>
@@ -20,7 +21,21 @@ const ProductCard = ({ product }) => {
                 <button className="button-add" onClick={() => addToCart(product)}>Agregar al carrito</button>
             </div>
         </div>
-    )
+    );
 }
+
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        rating: PropTypes.shape({
+            rate: PropTypes.number,
+            count: PropTypes.number
+        }).isRequired
+    }).isRequired
+};
 
 export default ProductCard;

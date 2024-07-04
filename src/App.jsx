@@ -1,68 +1,37 @@
-import './App.css';
+import { useState } from 'react';
 import Header from './components/header/Header.jsx'
 import Banner from './components/banner/Banner.jsx';
-import { Footer } from './components/footer/Footer';
-import { useState, useEffect } from 'react';
 import ProductsSection from './components/productsSection/ProductsSection.jsx';
-import { ThemeProvider } from './context/ThemeContext.jsx';
-import CestaProductos from './components/CestaProductos/CestaProductos.jsx';
-import Form from './components/FormLogin/FormLogin.jsx';
+import CartSection from './components/CartSection/CartSection.jsx'
+import LoginForm from './components/FormLogin/FormLogin.jsx';
+import { Footer } from './components/footer/Footer';
+import { useTheme } from "./hooks/useTheme.js"
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const [showCart, setShowCart] = useState(false);
+  const { darkMode } = useTheme();
+  const [ showCartSection, setShowCartSection ] = useState(false);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser);
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+  const handleShowCart = () => {
+    setShowCartSection(true);
   };
 
-  const handleLogin = (user) => {
-    setUser(user);
-    setIsLoggedIn(true);
-    localStorage.setItem('user', JSON.stringify(user));
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    setIsLoggedIn(false);
-    localStorage.removeItem('user');
-  };
-
-  const handleCartIconClick = () => {
-    setShowCart(true);
-  };
-
-  const handleBackToProductsClick = () => {
-    setShowCart(false);
+  const handleShowProducts = () => {
+    setShowCartSection(false);
   };
 
   return (
-      <>
-        <ThemeProvider>
+      <div className={darkMode ? "dark-mode" : ""}>
           <Header   
             onFilterChange={setFiltro} 
-            cartItemCount={cartItems.length} 
-            mostrarCesta={handleCartIconClick}
-            mostrarProductos={handleBackToProductsClick}
+            showCart={handleShowCart}
+            showProducts={handleShowProducts}
           />
-          <Banner isLoggedIn={isLoggedIn} user={user} />
-            { showCart ? <CestaProductos /> : <ProductsSection filtro={filtro} addToCart={addToCart} /> }
-          <ProductsSection filtro={filtro} addToCart={addToCart}/>
-          <Form onLogin={handleLogin} onLogout={handleLogout} isLoggedIn={isLoggedIn}/>
+          <Banner />
+            { showCartSection ? <CartSection /> : <ProductsSection filtro={filtro} /> }
+          <LoginForm />
           <Footer />
-        </ThemeProvider>
-      </>
+      </div>
   )
 }
 

@@ -1,42 +1,46 @@
-import { useState } from "react";
-import "./FormLogin.css"
+import './FormLogin.css';
+import useAuth from "../../hooks/useAuth";
 
-function Form({ onLogin, onLogout, isLoggedIn }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+const LoginForm = () => {
+    const { isLoggedIn, handleLogin, handleLogout, userData } = useAuth();
 
-    const handleLogin = () => {
-        if (!name || !email) {
-            alert('Por favor, completa todos los campos.');
-            return;
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const nombre = form.nombre.value;
+        const email = form.email.value;
+
+        if (nombre && email) {
+            handleLogin({ name: nombre, email });
+            form.reset();
+        } else {
+            alert("Por favor, completa todos los campos.");
         }
-        const user = { name, email };
-        onLogin(user);
     };
-
-    const handleLogout = () => {
-        onLogout();
-    };
-
 
     return (
-        <div className="form-login">
-            <input 
-                type="text" 
-                placeholder="Nombre"  
-                value={name} 
-                onChange={(e) => setName( e.target.value )}
-            />
-            <input 
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail( e.target.value )}
-            />
-            <button className="loginButton" onClick={handleLogin} >Login</button>
-            <button className="logoutButton" onClick={handleLogout} >Logout</button>
+        <div className='form-container'>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Nombre:
+                    <input type='text' name='text' />
+                </label>
+                <label>
+                    Email:
+                    <input type='email' name='email' />
+                </label>
+                {!isLoggedIn && <button type='submit'>Login</button>}
+            </form>
+            {isLoggedIn && (
+                <div className='user-info'>
+                    <button onClick={handleLogout} type='button'>
+                        Logout
+                    </button>
+                    <p>¿Quieres cerrar sesión, {userData.name}?</p>
+                </div>
+            )}
         </div>
     );
 };
 
-export default Form;
+export default LoginForm;

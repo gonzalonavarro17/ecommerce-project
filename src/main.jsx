@@ -2,18 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { CestaProvider } from './context/CestaContext.jsx'
+import { CartContext } from './context/CartContext.jsx'
 import { ThemeContext } from './context/ThemeContext.jsx'
-import { UserContext } from './context/UserContext.jsx'
+import { AuthContext } from './context/AuthContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeContext>
-      <UserContext>
-        <CestaProvider>
+      <AuthContext>
+        <CartContext>
           <App />
-        </CestaProvider>
-      </UserContext>
+        </CartContext>
+      </AuthContext>
     </ThemeContext>
   </React.StrictMode>,
 )
