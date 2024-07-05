@@ -68,13 +68,11 @@ img {
     background-color: #555555;
 }
 
-
 .button-add.light {
-    background-color: ##3471FA;
+    background-color: #3471FA;
     color: #000;
 }
 
-/* Estilos para el botón en modo oscuro */
 .button-add.dark {
     background-color: #FF5722;
     color: #fff;
