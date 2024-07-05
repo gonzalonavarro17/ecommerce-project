@@ -6,6 +6,7 @@ import CartSection from './components/CartSection/CartSection.jsx'
 import LoginForm from './components/FormLogin/FormLogin.jsx';
 import { Footer } from './components/footer/Footer';
 import { useTheme } from "./hooks/useTheme.jsx"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -21,17 +22,23 @@ function App() {
   };
 
   return (
-      <div className={darkMode ? "dark-mode" : ""}>
+    <BrowserRouter>
+        <div className={darkMode ? "dark-mode" : ""}>
           <Header   
             onFilterChange={setFiltro} 
             showCart={handleShowCart}
             showProducts={handleShowProducts}
           />
           <Banner />
-            { showCartSection ? <CartSection /> : <ProductsSection filtro={filtro} /> }
-          <LoginForm />
+          <Routes>
+            <Route path="/" element={<ProductsSection filtro={filtro} />} />
+            <Route path="/cart" element={<CartSection />} />
+            <Route path="/login" element={<LoginForm />} />
+          </Routes>
           <Footer />
-      </div>
+        </div>
+      
+    </BrowserRouter>
   )
 }
 

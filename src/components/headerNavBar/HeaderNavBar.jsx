@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom";
 
 function HeaderNavBar({ onFilterChange, onClickLogo }) {
     const menuOptions = ["Inicio", "Categorias", "Ofertas", "Contacto"];
@@ -12,9 +13,11 @@ function HeaderNavBar({ onFilterChange, onClickLogo }) {
 
      return (
         <>
-            <div onClick={onClickLogo} className="logo">
-                MiTienda
-            </div>
+            <Link to="/" className="header-icon">
+                <div onClick={onClickLogo} className="logo">
+                    MiTienda
+                </div>
+            </Link>
             <ul className="menu-options">
                 {menuOptions.map((option) => (
                 <li className="options-menu" key={option}>{option}</li>

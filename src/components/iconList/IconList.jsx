@@ -1,6 +1,7 @@
 import { useCart } from "../../hooks/useCart.jsx";
 import { useTheme } from "../../hooks/useTheme.jsx"
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function IconList({ onClickCartIcon }) {
     //const whiteIconStyle = { filter: "invert(100%" };
@@ -12,10 +13,12 @@ function IconList({ onClickCartIcon }) {
     return (
         <div className="Header-icons">
             <div className="icon-container">
-                <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
-                    {cartItemCount > 0 && (
-                        <span className="icon-badge">{cartItemCount}</span>
-                    )}
+                <Link to="/cart" className="header-icon">
+                    <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
+                        {cartItemCount > 0 && (
+                            <span className="icon-badge">{cartItemCount}</span>
+                        )}
+                </Link>
             </div>
             <i className="fas fa-heart" />
             <i className="fas fa-user" />
