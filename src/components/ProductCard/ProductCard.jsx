@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import './ProductCard.css'
 import { useCart } from "../../hooks/useCart.jsx"
+import { ThemeContext } from "../../context/ThemeContext.jsx"
 
 const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
     const { addToCart } = useCart();
+    const { darkMode } = useContext(ThemeContext);
 
     return (
         <div className='product-card' key={ id }>
@@ -18,7 +21,10 @@ const ProductCard = ({ product }) => {
                     </div>
                 )}
                 <p className='product-price'>{`$${price}`}</p>
-                <button className="button-add" onClick={() => addToCart(product)}>Agregar al carrito</button>
+                <button className={`button-add ${darkMode ? 'dark' : 'light'}`} 
+                    onClick={() => addToCart(product)}>
+                        Agregar al carrito
+                </button>
             </div>
         </div>
     );
