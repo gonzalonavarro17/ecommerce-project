@@ -34,8 +34,9 @@ body {
 }
 
 .search-bar {
-    width: 60rem;
-    margin-left: 3rem;
+    width: 50rem;
+    margin-left: 2rem;
+    margin-right: 1rem;
 }
 
 .Header-search {

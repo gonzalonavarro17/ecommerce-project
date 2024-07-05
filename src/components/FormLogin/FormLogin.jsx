@@ -1,14 +1,17 @@
 import './FormLogin.css';
+import { useRef } from 'react';
 import useAuth from "../../hooks/useAuth.jsx";
 
 const LoginForm = () => {
     const { isLoggedIn, handleLogin, handleLogout, userData } = useAuth();
+    const nombreRef = useRef(null);
+    const emailRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const nombre = form.nombre.value;
-        const email = form.email.value;
+        const nombre = nombreRef.current.value;
+        const email = emailRef.current.value;
 
         if (nombre && email) {
             handleLogin({ name: nombre, email });
@@ -23,17 +26,17 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Nombre:
-                    <input type='text' name='text' />
+                    <input type='text' name='text' ref={nombreRef} />
                 </label>
                 <label>
                     Email:
-                    <input type='email' name='email' />
+                    <input type='email' name='email' ref={emailRef} />
                 </label>
-                {!isLoggedIn && <button type='submit'>Login</button>}
+                {!isLoggedIn && <button type='submit' className='loginButton'>Login</button>}
             </form>
             {isLoggedIn && (
                 <div className='user-info'>
-                    <button onClick={handleLogout} type='button'>
+                    <button onClick={handleLogout} type='button' className='logoutButton'>
                         Logout
                     </button>
                     <p>¿Quieres cerrar sesión, {userData.name}?</p>
