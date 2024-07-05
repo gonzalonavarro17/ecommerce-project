@@ -1,9 +1,9 @@
-import { useCart } from "../../hooks/useCart";
-import { useTheme } from "../../hooks/useTheme"
+import { useCart } from "../../hooks/useCart.jsx";
+import { useTheme } from "../../hooks/useTheme.jsx"
 import PropTypes from "prop-types";
 
 function IconList({ onClickCartIcon }) {
-    const whiteIconStyle = { filter: "invert(100%" };
+    //const whiteIconStyle = { filter: "invert(100%" };
     const { cartItems } = useCart();
     const { toggleTheme } = useTheme();
 
@@ -12,14 +12,14 @@ function IconList({ onClickCartIcon }) {
     return (
         <div className="Header-icons">
             <div className="icon-container">
-                <i className="fas fa-shopping-cart" onClick={onClickCartIcon} style={whiteIconStyle} ></i>
+                <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
                     {cartItemCount > 0 && (
                         <span className="icon-badge">{cartItemCount}</span>
                     )}
             </div>
-            <i className="fas fa-heart" style={whiteIconStyle} />
-            <i className="fas fa-user" style={whiteIconStyle} />
-            <i className="fas fa-adjust" onClick={() => toggleTheme()} style={whiteIconStyle}/>
+            <i className="fas fa-heart" />
+            <i className="fas fa-user" />
+            <i className="fas fa-adjust" onClick={() => toggleTheme()} />
         </div>
     )
 }

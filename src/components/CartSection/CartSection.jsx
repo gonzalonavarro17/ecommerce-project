@@ -1,4 +1,4 @@
-import { useCart } from '../../hooks/useCart.js';
+import { useCart } from '../../hooks/useCart.jsx';
 import './CartSection.css';
 
 const CartSection = () => {

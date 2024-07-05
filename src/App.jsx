@@ -5,7 +5,7 @@ import ProductsSection from './components/productsSection/ProductsSection.jsx';
 import CartSection from './components/CartSection/CartSection.jsx'
 import LoginForm from './components/FormLogin/FormLogin.jsx';
 import { Footer } from './components/footer/Footer';
-import { useTheme } from "./hooks/useTheme.js"
+import { useTheme } from "./hooks/useTheme.jsx"
 
 function App() {
   const [ filtro, setFiltro ] = useState("");

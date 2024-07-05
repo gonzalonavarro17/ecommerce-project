@@ -1,5 +1,5 @@
 import './FormLogin.css';
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth.jsx";
 
 const LoginForm = () => {
     const { isLoggedIn, handleLogin, handleLogout, userData } = useAuth();

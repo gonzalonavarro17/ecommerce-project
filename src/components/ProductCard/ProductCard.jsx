@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './ProductCard.css'
-import { useCart } from "../../hooks/useCart.js"
+import { useCart } from "../../hooks/useCart.jsx"
 
 const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
