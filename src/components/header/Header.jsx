@@ -15,7 +15,7 @@ function Header({ onFilterChange, showCart, showProducts }) {
                     onFilterChange={handleFilterChange} 
                     onClickLogo={showProducts} 
                 />
-                <IconList onCartIconClick={showCart} />
+                <IconList onClickCartIcon={showCart} />
             </div>
         </header>
     );

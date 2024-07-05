@@ -10,9 +10,9 @@ const CartSection = () => {
 
     return (
         <div className="cart-section">
-            <h2>Your Cart</h2>
+            <h2>Resumen de compra</h2>
             {cartItems.length === 0 ? (
-                <p>Your cart is empty.</p>
+                <p>Tu carro esta vacío.</p>
             ) : (
                 <div>
                     <ul>
