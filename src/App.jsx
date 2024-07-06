@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/header/Header.jsx'
 import Banner from './components/banner/Banner.jsx';
 import ProductsSection from './components/productsSection/ProductsSection.jsx';
+import ProductDetails from './views/ProductDetails.jsx';
 import CartSection from './components/CartSection/CartSection.jsx'
 import LoginForm from './components/FormLogin/FormLogin.jsx';
 import { Footer } from './components/footer/Footer';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<ProductsSection filtro={filtro} />} />
             <Route path="/cart" element={<CartSection />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path='/products/:productId' element={<ProductDetails />} />
           </Routes>
           <Footer />
         </div>

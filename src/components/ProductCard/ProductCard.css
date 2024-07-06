@@ -1,8 +1,10 @@
 .product-card{
     border-radius: 1rem;
-   
+    position: relative;
     border: solid 0.1rem #F0F0F0;
     position: relative;
+    overflow: hidden;
+    height: 100%;
 }
 
 .product-image{
@@ -19,7 +21,9 @@ img {
     transition: all 150ms ease-in;
 }
 
-.product-info{}
+.product-info{
+    padding: 1rem;
+}
 
 .product-title{
     padding: 0;
@@ -72,8 +76,13 @@ img {
     background-color: #3471FA;
     color: #000;
 }
-
 .button-add.dark {
     background-color: #FF5722;
     color: #fff;
+}
+
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
 }

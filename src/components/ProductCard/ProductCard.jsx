@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import './ProductCard.css'
 import { useCart } from "../../hooks/useCart.jsx"
 import { ThemeContext } from "../../context/ThemeContext.jsx"
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
@@ -11,21 +12,23 @@ const ProductCard = ({ product }) => {
 
     return (
         <div className='product-card' key={ id }>
-            <img className='product-image' src={ image } alt={ title } />
-            <div className='product-info'>
-                <h3 className='product-title'>{ title }</h3>
-                <p className='product-description'>{ description }</p>
-                { false && (
-                    <div className='product-rating'>
-                        <p>{`Rating: ${ rating.rate } (${ rating.count } reviews)`}</p>
-                    </div>
-                )}
-                <p className='product-price'>{`$${price}`}</p>
-                <button className={`button-add ${darkMode ? 'dark' : 'light'}`} 
+            <Link to={`/products/${id}`} className='product-card-link'>
+                <img className='product-image' src={ image } alt={ title } />
+                <div className='product-info'>
+                    <h3 className='product-title'>{ title }</h3>
+                    <p className='product-description'>{ description }</p>
+                    { false && (
+                        <div className='product-rating'>
+                            <p>{`Rating: ${ rating.rate } (${ rating.count } reviews)`}</p>
+                        </div>
+                    )}
+                    <p className='product-price'>{`$${price}`}</p>
+                </div>
+            </Link>
+            <button className={`button-add ${darkMode ? 'dark' : 'light'}`} 
                     onClick={() => addToCart(product)}>
                         Agregar al carrito
-                </button>
-            </div>
+            </button>
         </div>
     );
 }
