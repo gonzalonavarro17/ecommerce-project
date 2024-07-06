@@ -8,6 +8,7 @@ import LoginForm from './components/FormLogin/FormLogin.jsx';
 import { Footer } from './components/footer/Footer';
 import { useTheme } from "./hooks/useTheme.jsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import NotFound from './views/NotFound.jsx';
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -36,6 +37,7 @@ function App() {
             <Route path="/cart" element={<CartSection />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path='/products/:productId' element={<ProductDetails />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
         </div>

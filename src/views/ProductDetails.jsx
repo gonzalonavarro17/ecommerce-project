@@ -1,12 +1,30 @@
 import { useParams } from "react-router-dom";
+import './ProductDetails.css'
+import { Link } from "react-router-dom";
+import data from "../fakeapi/data.json";
 
 const ProductDetails = () => {
 
     const { productId } = useParams();
 
+    const product = data.find(product => product.id === parseInt(productId));
+
+    const handleAddToCart = () => {
+        // Lógica para añadir el producto a la cesta
+        console.log(`Producto ${productId} añadido a la cesta`);
+    };
+
     return (
-        <div>
-            <h2>Detalles del producto con ID - {productId}</h2>
+        <div className="product-details">
+            <img src={product.image} alt={product.title} className="product-details-image" />
+            <h2>{product.title}</h2>
+            <p>{product.description}</p>
+            <p className="product-details-price">{`$${product.price}`}</p>
+            <div className="product-details-rating">
+                <p>{`Rating: ${product.rating.rate} (${product.rating.count} reviews)`}</p>
+            </div>
+            <button onClick={handleAddToCart}>Añadir a la cesta</button>
+            <Link to="/" className="back-button">Volver a la página principal</Link>
         </div>
     );
 };

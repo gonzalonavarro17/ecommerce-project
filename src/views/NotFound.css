@@ -1,0 +1,22 @@
+.div-notfound {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.h1-notfound {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.link-notfound {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.link-notfound:hover {
+    color: #0056b3;
+}
