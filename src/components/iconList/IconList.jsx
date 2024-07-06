@@ -21,7 +21,9 @@ function IconList({ onClickCartIcon }) {
                 </Link>
             </div>
             <i className="fas fa-heart" />
-            <i className="fas fa-user" />
+            <Link to="/login" className="header-icon-link" >
+                <i className="fas fa-user" />
+            </Link>
             <i className="fas fa-adjust" onClick={() => toggleTheme()} />
         </div>
     )
