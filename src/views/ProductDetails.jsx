@@ -2,15 +2,17 @@ import { useParams } from "react-router-dom";
 import './ProductDetails.css'
 import { Link } from "react-router-dom";
 import data from "../fakeapi/data.json";
+import { useCart } from "../hooks/useCart";
 
 const ProductDetails = () => {
 
     const { productId } = useParams();
+    const { addToCart } = useCart();
 
     const product = data.find(product => product.id === parseInt(productId));
 
     const handleAddToCart = () => {
-        // Lógica para añadir el producto a la cesta
+        addToCart(product);
         console.log(`Producto ${productId} añadido a la cesta`);
     };
 
