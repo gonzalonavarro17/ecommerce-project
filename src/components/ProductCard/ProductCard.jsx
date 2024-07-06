@@ -4,11 +4,13 @@ import './ProductCard.css'
 import { useCart } from "../../hooks/useCart.jsx"
 import { ThemeContext } from "../../context/ThemeContext.jsx"
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth.jsx"
 
 const ProductCard = ({ product }) => {
     const { id, title, price, description, image, rating } = product;
     const { addToCart } = useCart();
     const { darkMode } = useContext(ThemeContext);
+    const { isLoggedIn } = useAuth();
 
     return (
         <div className='product-card' key={ id }>
@@ -25,10 +27,12 @@ const ProductCard = ({ product }) => {
                     <p className='product-price'>{`$${price}`}</p>
                 </div>
             </Link>
-            <button className={`button-add ${darkMode ? 'dark' : 'light'}`} 
-                    onClick={() => addToCart(product)}>
-                        Agregar al carrito
-            </button>
+            {isLoggedIn && (
+                <button className={`button-add ${darkMode ? 'dark' : 'light'}`} 
+                        onClick={() => addToCart(product)}>
+                            Agregar al carrito
+                </button>
+            )}
         </div>
     );
 }

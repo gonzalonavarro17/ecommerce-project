@@ -3,11 +3,13 @@ import './ProductDetails.css'
 import { Link } from "react-router-dom";
 import data from "../fakeapi/data.json";
 import { useCart } from "../hooks/useCart";
+import useAuth from "../hooks/useAuth";
 
 const ProductDetails = () => {
 
     const { productId } = useParams();
     const { addToCart } = useCart();
+    const { isLoggedIn } = useAuth();
 
     const product = data.find(product => product.id === parseInt(productId));
 
@@ -25,7 +27,9 @@ const ProductDetails = () => {
             <div className="product-details-rating">
                 <p>{`Rating: ${product.rating.rate} (${product.rating.count} reviews)`}</p>
             </div>
-            <button onClick={handleAddToCart}>Añadir a la cesta</button>
+            {isLoggedIn && (
+                <button onClick={handleAddToCart}>Añadir a la cesta</button>
+            )}
             <Link to="/" className="back-button">Volver a la página principal</Link>
         </div>
     );

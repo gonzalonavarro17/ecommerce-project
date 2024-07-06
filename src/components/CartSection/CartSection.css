@@ -60,3 +60,30 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+.cart-buttons {
+    margin-top: 20px;
+}
+
+.cart-buttons button {
+    background-color: #28a745; /* Color verde para finalizar compra */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-buttons button:hover {
+    background-color: #218838; /* Color verde más oscuro al pasar el ratón */
+}
+
+.cart-buttons button:nth-child(2) {
+    background-color: #dc3545;
+}
+
+.cart-buttons button:nth-child(2):hover {
+    background-color: #c82333;
+}
