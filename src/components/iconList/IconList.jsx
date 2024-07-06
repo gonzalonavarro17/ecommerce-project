@@ -13,7 +13,7 @@ function IconList({ onClickCartIcon }) {
     return (
         <div className="Header-icons">
             <div className="icon-container">
-                <Link to="/cart" className="header-icon">
+                <Link to="/cart" className="header-icon-link">
                     <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
                         {cartItemCount > 0 && (
                             <span className="icon-badge">{cartItemCount}</span>

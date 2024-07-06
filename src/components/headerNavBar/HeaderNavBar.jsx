@@ -13,7 +13,7 @@ function HeaderNavBar({ onFilterChange, onClickLogo }) {
 
      return (
         <>
-            <Link to="/" className="header-icon">
+            <Link to="/" className="header-icon-link">
                 <div onClick={onClickLogo} className="logo">
                     MiTienda
                 </div>
