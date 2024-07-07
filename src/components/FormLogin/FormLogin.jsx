@@ -1,17 +1,23 @@
 import './FormLogin.css';
 import { useRef } from 'react';
 import useAuth from "../../hooks/useAuth.jsx";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const LoginForm = () => {
     const { isLoggedIn, handleLogin, handleLogout, userData } = useAuth();
     const nombreRef = useRef(null);
     const emailRef = useRef(null);
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const nombre = nombreRef.current.value;
         const email = emailRef.current.value;
+
+        navigate(location.state.pathname);
 
         if (nombre && email) {
             handleLogin({ name: nombre, email });

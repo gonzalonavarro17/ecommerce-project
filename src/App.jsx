@@ -9,6 +9,7 @@ import { Footer } from './components/footer/Footer';
 import { useTheme } from "./hooks/useTheme.jsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NotFound from './views/NotFound.jsx';
+import ProtectedRoute from './views/ProtectedRoute.jsx';
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -34,9 +35,17 @@ function App() {
           <Banner />
           <Routes>
             <Route path="/" element={<ProductsSection filtro={filtro} />} />
-            <Route path="/cart" element={<CartSection />} />
+            <Route path="/cart" element={
+              <ProtectedRoute>
+                <CartSection />
+              </ProtectedRoute>
+            }/>
             <Route path="/login" element={<LoginForm />} />
-            <Route path='/products/:productId' element={<ProductDetails />} />
+            <Route path='/products/:productId' element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }/>
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
