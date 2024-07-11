@@ -1,5 +1,5 @@
 import './Banner.css';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import useAuth from "../../hooks/useAuth.jsx";
 
 const Banner = () => {
@@ -17,11 +17,6 @@ const Banner = () => {
     );
 };
 
-Banner.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
-    userData: PropTypes.shape({
-        name: PropTypes.string.isRequired
-    })
-};
+
 
 export default Banner;

@@ -17,7 +17,8 @@ const LoginForm = () => {
         const nombre = nombreRef.current.value;
         const email = emailRef.current.value;
 
-        navigate(location.state.pathname);
+        const pathToNavigate = location.state?.pathname || '/';
+        navigate(pathToNavigate);
 
         if (nombre && email) {
             handleLogin({ name: nombre, email });
