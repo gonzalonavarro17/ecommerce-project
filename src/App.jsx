@@ -10,6 +10,7 @@ import { useTheme } from "./hooks/useTheme.jsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NotFound from './views/NotFound.jsx';
 import ProtectedRoute from './views/ProtectedRoute.jsx';
+import AdminProducts from "./components/AdminProducts/AdminProducts.jsx"
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -41,6 +42,13 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/admin" 
+              element={ 
+              <ProtectedRoute adminOnly>
+                <AdminProducts />
+              </ProtectedRoute>
+            }
+          />
             <Route path='/products/:productId' element={
               <ProtectedRoute>
                 <ProductDetails />

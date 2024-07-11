@@ -17,12 +17,11 @@ const LoginForm = () => {
         const nombre = nombreRef.current.value;
         const email = emailRef.current.value;
 
-        const pathToNavigate = location.state?.pathname || '/';
-        navigate(pathToNavigate);
-
         if (nombre && email) {
             handleLogin({ name: nombre, email });
             form.reset();
+            const pathToNavigate = location.state?.pathname || '/admin';
+        navigate(pathToNavigate);
         } else {
             alert("Por favor, completa todos los campos.");
         }

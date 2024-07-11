@@ -15,8 +15,9 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const handleLogin = ({ name, email }) => {
+        const isAdmin = email.includes("@admin") ? "admin" : "user";
         setIsLoggedIn(true);
-        const userDataObj = { name, email };
+        const userDataObj = { name, email, role: isAdmin };
         setUserData(userDataObj);
         localStorage.setItem("userData", JSON.stringify(userDataObj));
     };
