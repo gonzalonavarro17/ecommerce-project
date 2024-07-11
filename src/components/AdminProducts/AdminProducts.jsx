@@ -33,15 +33,16 @@ const AdministrarProducts = () => {
     return (
         <>
         <h2>Gestión de productos</h2>
+        <button onClick={addProduct} className="add-product-btn">(+) Añadir Producto</button>
             <div className="admin-products-section">
                 {/* Botón para añadir producto */}
-                <button onClick={addProduct} className="add-product-btn">(+) Añadir Producto</button>
                 {/* Lista de productos */}
                 {products.map((product) => (
                     <div key={product.id} className="admin-product">
                         <img className='admin-product-image' src={ product.image } alt={ product.title } />
                         <div className='admin-product-info'>
-                        <h3 className='admin-product-title'>{ product.title }</h3>
+                            <h3 className='admin-product-title'>{ product.title }</h3>
+                            <p className='admin-product-description'>{ product.description }</p>
                         </div>
                         {/* Botones para eliminar y editar */}
                         <button onClick={() => deleteProduct(product.id)} className="delete-product-btn">Eliminar</button>

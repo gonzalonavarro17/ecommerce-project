@@ -48,6 +48,16 @@ img {
     overflow: hidden;
 }
 
+.admin-product-description{
+    font-size: 0.9rem;
+    padding: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 4rem;
+}
+
 
 .add-product-btn {
     background-color: #3471fa;
@@ -56,29 +66,11 @@ img {
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
+    margin-left: 1rem;
 }
 
 .add-product-btn:hover {
     background-color: #555555;
-}
-
-.admin-product {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-}
-
-
-.admin-product p {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
 }
 
 .delete-product-btn,
