@@ -20,7 +20,7 @@ const LoginForm = () => {
         if (nombre && email) {
             handleLogin({ name: nombre, email });
             form.reset();
-            const pathToNavigate = location.state?.pathname || '/admin';
+            const pathToNavigate = location.state?.pathname || '/admin/products';
         navigate(pathToNavigate);
         } else {
             alert("Por favor, completa todos los campos.");

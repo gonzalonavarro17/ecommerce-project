@@ -42,7 +42,7 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/admin" 
+            <Route path="/admin/products" 
               element={ 
               <ProtectedRoute adminOnly>
                 <AdminProducts />
