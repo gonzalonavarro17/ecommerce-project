@@ -17,7 +17,7 @@ h2 {
     border: solid 0.1rem #F0F0F0;
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: auto;
 }
 
 .admin-product-image{
@@ -55,35 +55,44 @@ img {
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
 }
 
+.admin-product-price{
+    position: absolute;
+    bottom: 3rem;
+    left: 0;
+    margin: 0;
+    padding: 10px;
+    color: #3471FA;
+    font-weight: bold;
+}
+
+.icon-container {
+    position: absolute;
+    bottom: 0; /* Coloca este contenedor justo debajo del precio */
+    left: 0;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.delete-icon {
+    margin-right: 2rem; /* Espacio entre iconos */
+    cursor: pointer;
+}
+
+.edit-icon {
+    margin-right: 0;
+}
 
 .add-product-btn {
-    background-color: #3471fa;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
     margin-left: 1rem;
+    cursor: pointer;
+    background-color: #3471FA;
 }
 
 .add-product-btn:hover {
-    background-color: #555555;
-}
-
-.delete-product-btn,
-.edit-product-btn {
-    background-color: #ff5722;
-    color: #fff;
-    border: none;
-    padding: 0.3rem 0.5rem;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}
-
-.delete-product-btn:hover,
-.edit-product-btn:hover {
-    background-color: #555555;
+    background-color: #706969;
 }

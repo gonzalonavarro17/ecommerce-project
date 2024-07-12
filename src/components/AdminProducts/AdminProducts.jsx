@@ -43,10 +43,13 @@ const AdministrarProducts = () => {
                         <div className='admin-product-info'>
                             <h3 className='admin-product-title'>{ product.title }</h3>
                             <p className='admin-product-description'>{ product.description }</p>
+                            <p className='admin-product-price'>${ product.price }</p>
                         </div>
                         {/* Botones para eliminar y editar */}
-                        <button onClick={() => deleteProduct(product.id)} className="delete-product-btn">Eliminar</button>
-                        <button onClick={() => editProduct(product.id)} className="edit-product-btn">Editar</button>
+                        <div className="icon-container">
+                        <i onClick={() => deleteProduct(product.id)} className="fas fa-trash delete-icon"></i>
+                        <i onClick={() => editProduct(product.id)} className="fas fa-edit edit-icon"></i>
+                        </div>
                     </div>
                 ))}
             </div>
