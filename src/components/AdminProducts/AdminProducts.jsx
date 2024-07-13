@@ -4,11 +4,13 @@ import { AuthContext } from '../../context/AuthContext';
 import data from "../../fakeapi/data.json";
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Asegúrate de que coincide con el id de tu elemento raíz
+Modal.setAppElement('#root');
 
 const AdministrarProducts = () => {
     const { userData } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [newProduct, setNewProduct] = useState({
@@ -20,8 +22,23 @@ const AdministrarProducts = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
 
     useEffect(() => {
-        setProducts(data); // Establece los productos desde el archivo data.json
+        fetchProducts();
     }, []);
+
+    const fetchProducts = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch('http://localhost:3000/products');
+            if (!response.ok) throw new Error('Error fetching products');
+            const data = await response.json();
+            setProducts(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const openModal = () => {
         setNewProduct({ title: '', description: '', price: '', image: '' });
@@ -42,24 +59,69 @@ const AdministrarProducts = () => {
         setEditModalIsOpen(false);
     };
 
-    const addProduct = () => {
-        const productToAdd = {
-            ...newProduct,
-            id: products.length ? products[products.length - 1].id + 1 : 1,
-        };
-        setProducts([...products, productToAdd]);
-        closeModal();
+    const addProduct = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch('http://localhost:3000/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...newProduct,
+                    id: products.length ? products[products.length - 1].id + 1 : 1,
+                }),
+            });
+            if (!response.ok) throw new Error('Error adding product');
+            const product = await response.json();
+            setProducts([...products, product]);
+            closeModal();
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const deleteProduct = (productId) => {
-        setProducts(products.filter(product => product.id !== productId));
+    const deleteProduct = async (productId) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`http://localhost:3000/products/${productId}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) throw new Error('Error deleting product');
+            setProducts(products.filter(product => product.id !== productId));
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const editProduct = () => {
-        setProducts(products.map(product => 
-            product.id === currentProduct.id ? newProduct : product
-        ));
-        closeEditModal();
+    const editProduct = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`http://localhost:3000/products/${currentProduct.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            });
+            if (!response.ok) throw new Error('Error editing product');
+            const updatedProduct = await response.json();
+            setProducts(products.map(product => 
+                product.id === currentProduct.id ? updatedProduct : product
+            ));
+            closeEditModal();
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (userData.role !== 'admin') {
