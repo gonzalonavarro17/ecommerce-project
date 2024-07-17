@@ -1,18 +1,17 @@
 import './AdminProducts.css';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import data from "../../fakeapi/data.json";
+import { ProductsContext } from '../../context/ProductsContext';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
 const AdministrarProducts = () => {
     const { userData } = useContext(AuthContext);
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const { products, setProducts, loading, setLoading, error, setError } = useContext(ProductsContext);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
     const [newProduct, setNewProduct] = useState({
         title: '',
         description: '',
@@ -20,25 +19,6 @@ const AdministrarProducts = () => {
         image: ''
     });
     const [currentProduct, setCurrentProduct] = useState(null);
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
-
-    const fetchProducts = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-            const response = await fetch('http://localhost:3000/products');
-            if (!response.ok) throw new Error('Error fetching products');
-            const data = await response.json();
-            setProducts(data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const openModal = () => {
         setNewProduct({ title: '', description: '', price: '', image: '' });
@@ -59,6 +39,17 @@ const AdministrarProducts = () => {
         setEditModalIsOpen(false);
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewProduct({ ...newProduct, image: reader.result });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const addProduct = async () => {
         setLoading(true);
         setError(null);
@@ -76,6 +67,7 @@ const AdministrarProducts = () => {
             if (!response.ok) throw new Error('Error adding product');
             const product = await response.json();
             setProducts([...products, product]);
+            setSuccessMessage("Producto añadido correctamente.");
             closeModal();
         } catch (err) {
             setError(err.message);
@@ -116,6 +108,7 @@ const AdministrarProducts = () => {
             setProducts(products.map(product => 
                 product.id === currentProduct.id ? updatedProduct : product
             ));
+            setSuccessMessage("Producto editado correctamente.");
             closeEditModal();
         } catch (err) {
             setError(err.message);
@@ -132,6 +125,7 @@ const AdministrarProducts = () => {
         <>
             <h2>Gestión de productos</h2>
             <button onClick={openModal} className="add-product-btn">(+) Añadir Producto</button>
+            {successMessage && <div className="success-message">{successMessage}</div>}
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -158,10 +152,9 @@ const AdministrarProducts = () => {
                         onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
                     />
                     <input
-                        type="text"
-                        placeholder="URL de la imagen"
-                        value={newProduct.image}
-                        onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageChange(e)}
                     />
                     <button type="button" onClick={addProduct}>Añadir Producto</button>
                     <button type="button" onClick={closeModal}>Cancelar</button>
@@ -193,30 +186,26 @@ const AdministrarProducts = () => {
                         onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
                     />
                     <input
-                        type="text"
-                        placeholder="URL de la imagen"
-                        value={newProduct.image}
-                        onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageChange(e)}
                     />
                     <button type="button" onClick={editProduct}>Guardar Cambios</button>
                     <button type="button" onClick={closeEditModal}>Cancelar</button>
                 </form>
             </Modal>
             <div className="admin-products-section">
-                {/* Botón para añadir producto */}
-                {/* Lista de productos */}
                 {products.map((product) => (
                     <div key={product.id} className="admin-product">
-                        <img className='admin-product-image' src={ product.image } alt={ product.title } />
+                        <img className='admin-product-image' src={product.image} alt={product.title} />
                         <div className='admin-product-info'>
-                            <h3 className='admin-product-title'>{ product.title }</h3>
-                            <p className='admin-product-description'>{ product.description }</p>
-                            <p className='admin-product-price'>${ product.price }</p>
+                            <h3 className='admin-product-title'>{product.title}</h3>
+                            <p className='admin-product-description'>{product.description}</p>
+                            <p className='admin-product-price'>${product.price}</p>
                         </div>
-                        {/* Botones para eliminar y editar */}
                         <div className="icon-container">
-                        <i onClick={() => deleteProduct(product.id)} className="fas fa-trash delete-icon"></i>
-                        <i onClick={() => editProduct(product.id)} className="fas fa-edit edit-icon"></i>
+                            <i onClick={() => deleteProduct(product.id)} className="fas fa-trash delete-icon"></i>
+                            <i onClick={() => openEditModal(product)} className="fas fa-edit edit-icon"></i>
                         </div>
                     </div>
                 ))}

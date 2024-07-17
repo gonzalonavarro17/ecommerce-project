@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NotFound from './views/NotFound.jsx';
 import ProtectedRoute from './views/ProtectedRoute.jsx';
 import AdminProducts from "./components/AdminProducts/AdminProducts.jsx"
+import { ProductsProvider } from './context/ProductsContext.jsx';
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -27,38 +28,39 @@ function App() {
 
   return (
     <BrowserRouter>
-        <div className={darkMode ? "dark-mode" : ""}>
-          <Header   
-            onFilterChange={setFiltro} 
-            showCart={handleShowCart}
-            showProducts={handleShowProducts}
-          />
-          <Banner />
-          <Routes>
-            <Route path="/" element={<ProductsSection filtro={filtro} />} />
-            <Route path="/cart" element={
-              <ProtectedRoute>
-                <CartSection />
-              </ProtectedRoute>
-            }/>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/admin/products" 
-              element={ 
-              <ProtectedRoute adminOnly>
-                <AdminProducts />
-              </ProtectedRoute>
-            }
-          />
-            <Route path='/products/:productId' element={
-              <ProtectedRoute>
-                <ProductDetails />
-              </ProtectedRoute>
-            }/>
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-      
+    <ProductsProvider>
+          <div className={darkMode ? "dark-mode" : ""}>
+            <Header   
+              onFilterChange={setFiltro} 
+              showCart={handleShowCart}
+              showProducts={handleShowProducts}
+            />
+            <Banner />
+            <Routes>
+              <Route path="/" element={<ProductsSection filtro={filtro} />} />
+              <Route path="/cart" element={
+                <ProtectedRoute>
+                  <CartSection />
+                </ProtectedRoute>
+              }/>
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/admin/products" 
+                element={ 
+                <ProtectedRoute adminOnly>
+                  <AdminProducts />
+                </ProtectedRoute>
+              }
+            />
+              <Route path='/products/:productId' element={
+                <ProtectedRoute>
+                  <ProductDetails />
+                </ProtectedRoute>
+              }/>
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </div>
+        </ProductsProvider> 
     </BrowserRouter>
   )
 }

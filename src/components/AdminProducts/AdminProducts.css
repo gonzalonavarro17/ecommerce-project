@@ -93,3 +93,9 @@ img {
 .add-product-btn:hover {
     background-color: #706969;
 }
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
