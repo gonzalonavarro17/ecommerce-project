@@ -104,7 +104,7 @@
     cursor: pointer;
 }
 
-/* Modo oscuro */
+/* Modo dark */
 .dark-mode .header-container {
     background-color: #343a40;
     color: white;

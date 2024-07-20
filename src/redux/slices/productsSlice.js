@@ -7,7 +7,6 @@ const initialState = {
   error: null,
 };
 
-// Thunks
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
@@ -40,7 +39,6 @@ export const editProduct = createAsyncThunk(
   }
 );
 
-// Slice
 const productsSlice = createSlice({
   name: 'products',
   initialState,
