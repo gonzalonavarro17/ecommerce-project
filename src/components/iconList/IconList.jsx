@@ -12,17 +12,15 @@ function IconList({ onClickCartIcon }) {
 
     return (
         <div className="Header-icons">
-            <div className="icon-container">
-                <Link to="/cart" className="header-icon-link">
-                    <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
-                        {cartItemCount > 0 && (
-                            <span className="icon-badge">{cartItemCount}</span>
-                        )}
-                </Link>
-            </div>
+            <Link to="/cart" className="header-icon-link">
+                <i className="fas fa-shopping-cart" onClick={onClickCartIcon} ></i>
+                    {cartItemCount > 0 && (
+                    <span className="icon-badge">{cartItemCount}</span>
+                    )}
+            </Link>
             <i className="fas fa-heart" />
             <Link to="/login" className="header-icon-link" >
-                <i className="fas fa-user" />
+            <i className="fas fa-user" />
             </Link>
             <i className="fas fa-adjust" onClick={() => toggleTheme()} />
         </div>

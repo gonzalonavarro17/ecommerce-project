@@ -1,25 +1,33 @@
-import "./ProductsSection.css";
-import ProductCard from "../ProductCard/ProductCard.jsx"
-import { useContext } from 'react';
-import { ProductsContext } from '../../context/ProductsContext';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from '../../redux/slices/productsSlice.js';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import './ProductsSection.css';
 
 function ProductsSection({ filtro, addToCart }) {
-    const { products, loading, error } = useContext(ProductsContext);
+  const dispatch = useDispatch();
+  const { products, status, error } = useSelector((state) => state.products);
 
-    const filteredProducts = products.filter(
-        (product) => product.title.toLowerCase().includes(filtro.toLowerCase())
-    );
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchProducts());
+    }
+  }, [status, dispatch]);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+  const filteredProducts = products.filter(
+    (product) => product.title.toLowerCase().includes(filtro.toLowerCase())
+  );
 
-    return (
-        <div className="products-section">
-            {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} addToCart={addToCart} />
-            ))}
-        </div>
-    );
+  if (status === 'loading') return <p>Loading...</p>;
+  if (status === 'failed') return <p>{error}</p>;
+
+  return (
+    <div className="products-section">
+      {filteredProducts.map((product) => (
+        <ProductCard key={product.id} product={product} addToCart={addToCart} />
+      ))}
+    </div>
+  );
 }
 
 export default ProductsSection;

@@ -11,7 +11,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NotFound from './views/NotFound.jsx';
 import ProtectedRoute from './views/ProtectedRoute.jsx';
 import AdminProducts from "./components/AdminProducts/AdminProducts.jsx"
-import { ProductsProvider } from './context/ProductsContext.jsx';
 
 function App() {
   const [ filtro, setFiltro ] = useState("");
@@ -28,7 +27,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    <ProductsProvider>
           <div className={darkMode ? "dark-mode" : ""}>
             <Header   
               onFilterChange={setFiltro} 
@@ -60,7 +58,6 @@ function App() {
             </Routes>
             <Footer />
           </div>
-        </ProductsProvider> 
     </BrowserRouter>
   )
 }
