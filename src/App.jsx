@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from './components/header/Header.jsx'
 import Banner from './components/banner/Banner.jsx';
-import ProductsSection from './components/productsSection/ProductsSection.jsx';
+import ProductsSection from './components/ProductsSection/ProductsSection.jsx'
 import ProductDetails from './views/ProductDetails.jsx';
 import CartSection from './components/CartSection/CartSection.jsx'
 import LoginForm from './components/FormLogin/FormLogin.jsx';
