@@ -4,6 +4,7 @@ import { fetchProducts } from '../../redux/slices/productsSlice.js';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import './ProductsSection.css';
 
+
 function ProductsSection({ filtro, addToCart }) {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.products);
