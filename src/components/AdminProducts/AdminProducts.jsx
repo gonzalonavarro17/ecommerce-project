@@ -15,7 +15,7 @@ const AdminProducts = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
-    const { register, handleSubmit, formState: { errors } , setValue, reset } = useForm();
+    const { register, handleSubmit, formState: { errors } , setValue, reset, trigger } = useForm();
 
     useEffect(() => {
         if (status === 'idle') {
@@ -97,6 +97,7 @@ const AdminProducts = () => {
                         type="text"
                         placeholder="Título"
                         {...register('title', { required: true, minLength: 3, maxLength: 30 })}
+                        onBlur={() => trigger('title')}
                     />
                     {errors.title && <p className='p-errors'>El título es obligatorio y debe tener entre 3 y 30 caracteres.</p>}
 
@@ -104,13 +105,16 @@ const AdminProducts = () => {
                         type="text"
                         placeholder="Descripción"
                         {...register('description', { required: true, minLength: 10, maxLength: 200 })}
+                        onBlur={() => trigger('description')}
                     />
                     {errors.description && <p className='p-errors'>La descripción es obligatoria y debe tener entre 10 y 200 caracteres.</p>}
 
                     <input
                         type="number"
+                        step="0.01"
                         placeholder="Precio"
                         {...register('price', { required: true, min: 0.01 })}
+                        onBlur={() => trigger('price')}
                     />
                     {errors.price && <p className='p-errors'>El precio es obligatorio y debe ser mayor que 0.</p>}
 
@@ -118,6 +122,7 @@ const AdminProducts = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
+                        onBlur={() => trigger('image')}
                     />
                     
                     <button type="submit">Añadir Producto</button>
@@ -135,6 +140,7 @@ const AdminProducts = () => {
                         type="text"
                         placeholder="Título"
                         {...register('title', { required: true, minLength: 3, maxLength: 30 })}
+                        onBlur={() => trigger('title')}
                     />
                     {errors.title && <p className='p-errors'>El título es obligatorio y debe tener entre 3 y 30 caracteres.</p>}
 
@@ -142,13 +148,16 @@ const AdminProducts = () => {
                         type="text"
                         placeholder="Descripción"
                         {...register('description', { required: true, minLength: 10, maxLength: 200 })}
+                        onBlur={() => trigger('description')}
                     />
                     {errors.description && <p className='p-errors'>La descripción es obligatoria y debe tener entre 10 y 200 caracteres.</p>}
 
                     <input
                         type="number"
+                        step="0.01"
                         placeholder="Precio"
                         {...register('price', { required: true, min: 0.01 })}
+                        onBlur={() => trigger('price')}
                     />
                     {errors.price && <p className='p-errors'>El precio es obligatorio y debe ser mayor que 0.</p>}
 
@@ -156,6 +165,7 @@ const AdminProducts = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
+                        onBlur={() => trigger('image')}
                     />
 
                     <button type="submit">Guardar Cambios</button>
