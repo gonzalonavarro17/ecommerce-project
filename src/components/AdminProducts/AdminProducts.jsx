@@ -119,6 +119,7 @@ const AdminProducts = () => {
                         accept="image/*"
                         onChange={handleImageChange}
                     />
+                    
                     <button type="submit">Añadir Producto</button>
                     <button type="button" onClick={closeModal}>Cancelar</button>
                 </form>
@@ -156,6 +157,7 @@ const AdminProducts = () => {
                         accept="image/*"
                         onChange={handleImageChange}
                     />
+
                     <button type="submit">Guardar Cambios</button>
                     <button type="button" onClick={closeEditModal}>Cancelar</button>
                 </form>
