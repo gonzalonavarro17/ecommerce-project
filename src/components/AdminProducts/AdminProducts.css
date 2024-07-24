@@ -1,5 +1,8 @@
 h2 {
     margin-left: 1rem;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 .admin-products-section {
     padding: 1rem;
@@ -98,4 +101,61 @@ img {
     color: green;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.form-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 3px;
+}
+
+.p-errors {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+button[type="submit"],
+button[type="button"] {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="button"] {
+    background: #6c757d;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    opacity: 0.9;
 }

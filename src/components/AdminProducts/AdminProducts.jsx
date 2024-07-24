@@ -2,6 +2,7 @@ import './AdminProducts.css';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, addProduct, deleteProduct, editProduct } from '../../redux/slices/productsSlice'
+import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -13,13 +14,8 @@ const AdminProducts = () => {
     const error = useSelector((state) => state.products.error);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
-    const [newProduct, setNewProduct] = useState({
-        title: '',
-        description: '',
-        price: '',
-        image: ''
-    });
     const [currentProduct, setCurrentProduct] = useState(null);
+    const { register, handleSubmit, formState: { errors } , setValue, reset } = useForm();
 
     useEffect(() => {
         if (status === 'idle') {
@@ -28,7 +24,7 @@ const AdminProducts = () => {
     }, [status, dispatch]);
 
     const openModal = () => {
-        setNewProduct({ title: '', description: '', price: '', image: '' });
+        reset();
         setModalIsOpen(true);
     };
 
@@ -38,7 +34,7 @@ const AdminProducts = () => {
 
     const openEditModal = (product) => {
         setCurrentProduct(product);
-        setNewProduct(product);
+        reset(product);
         setEditModalIsOpen(true);
     };
 
@@ -51,27 +47,31 @@ const AdminProducts = () => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setNewProduct({ ...newProduct, image: reader.result });
+                setValue('image', reader.result);
             };
             reader.readAsDataURL(file);
         }
     };
 
-    const handleAddProduct = async () => {
-        await dispatch(addProduct(newProduct));
+    const onSubmitAdd = async (data) => {
+        await dispatch(addProduct(data));
         closeModal();
         alert("Producto añadido correctamente.");
     };
 
-    const handleDeleteProduct = async (productId) => {
-        await dispatch(deleteProduct(productId));
-        alert("Producto eliminado correctamente.");
-    };
-
-    const handleEditProduct = async () => {
-        await dispatch(editProduct({ ...currentProduct, ...newProduct }));
+    const onSubmitEdit = async (data) => {
+        await dispatch(editProduct({ ...currentProduct, ...data }));
         closeEditModal();
         alert("Producto editado correctamente.");
+    };
+
+    const handleDeleteProduct = async (productId) => {
+        try {
+            await dispatch(deleteProduct(productId));
+            alert("Producto eliminado correctamente.");
+        } catch (err) {
+            alert("Error al eliminar el producto: " + err.message);
+        }
     };
 
     if (status === 'loading') {
@@ -92,31 +92,34 @@ const AdminProducts = () => {
                 contentLabel="Añadir Producto"
             >
                 <h2>Añadir Producto</h2>
-                <form>
+                <form className="form-admin" onSubmit={handleSubmit(onSubmitAdd)}>
                     <input
                         type="text"
                         placeholder="Título"
-                        value={newProduct.title}
-                        onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
+                        {...register('title', { required: true, minLength: 3, maxLength: 30 })}
                     />
+                    {errors.title && <p className='p-errors'>El título es obligatorio y debe tener entre 3 y 30 caracteres.</p>}
+
                     <input
                         type="text"
                         placeholder="Descripción"
-                        value={newProduct.description}
-                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                        {...register('description', { required: true, minLength: 10, maxLength: 200 })}
                     />
+                    {errors.description && <p className='p-errors'>La descripción es obligatoria y debe tener entre 10 y 200 caracteres.</p>}
+
                     <input
                         type="number"
                         placeholder="Precio"
-                        value={newProduct.price}
-                        onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                        {...register('price', { required: true, min: 0.01 })}
                     />
+                    {errors.price && <p className='p-errors'>El precio es obligatorio y debe ser mayor que 0.</p>}
+
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
                     />
-                    <button type="button" onClick={handleAddProduct}>Añadir Producto</button>
+                    <button type="submit">Añadir Producto</button>
                     <button type="button" onClick={closeModal}>Cancelar</button>
                 </form>
             </Modal>
@@ -126,31 +129,34 @@ const AdminProducts = () => {
                 contentLabel="Editar Producto"
             >
                 <h2>Editar Producto</h2>
-                <form>
+                <form onSubmit={handleSubmit(onSubmitEdit)}>
                     <input
                         type="text"
                         placeholder="Título"
-                        value={newProduct.title}
-                        onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
+                        {...register('title', { required: true, minLength: 3, maxLength: 30 })}
                     />
+                    {errors.title && <p className='p-errors'>El título es obligatorio y debe tener entre 3 y 30 caracteres.</p>}
+
                     <input
                         type="text"
                         placeholder="Descripción"
-                        value={newProduct.description}
-                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                        {...register('description', { required: true, minLength: 10, maxLength: 200 })}
                     />
+                    {errors.description && <p className='p-errors'>La descripción es obligatoria y debe tener entre 10 y 200 caracteres.</p>}
+
                     <input
                         type="number"
                         placeholder="Precio"
-                        value={newProduct.price}
-                        onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                        {...register('price', { required: true, min: 0.01 })}
                     />
+                    {errors.price && <p className='p-errors'>El precio es obligatorio y debe ser mayor que 0.</p>}
+
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
                     />
-                    <button type="button" onClick={handleEditProduct}>Guardar Cambios</button>
+                    <button type="submit">Guardar Cambios</button>
                     <button type="button" onClick={closeEditModal}>Cancelar</button>
                 </form>
             </Modal>
